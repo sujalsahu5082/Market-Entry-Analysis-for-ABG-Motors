@@ -8,7 +8,7 @@ Indian customers and evaluating profitability against a sales target of <b>12,00
 </p>
 
 <p align="center">
-  <img src="https://github.com/pratiksutar841/Market-Entry-Analysis-for-ABG-Motors-in-India---CAPSTONE-PROJECT-/blob/main/Dashboard-Photo.png" alt="Market Entry Analysis" width="800">
+  <img src="https://github.com/sujalsahu5082/Market-Entry-Analysis-for-ABG-Motors/raw/main/Dashboard-Photo.png" alt="Market Entry Analysis" width="800">
 </p>
 
 <hr>
@@ -30,21 +30,30 @@ ABG Motors is exploring expansion opportunities in India, assuming customer beha
 <h2>📂 Project Structure</h2>
 <pre>
 📁 ABG-Market-Entry-Analysis
-│── ABG_Market_Entry_Analysis.ipynb          # Jupyter Notebook with full workflow
-│── cleaned_japanese.csv                     # Cleaned Japanese dataset
-│── cleaned_indian_with_predictions.csv      # Indian dataset with prediction results
-│── ABG_Market_Entry_Report.docx              # Detailed project report
-│── /Tableau_Charts/                          # Tableau visualizations (PNG/Screenshots)
-│── README.md                                 # Project documentation
+│── CAPSTONE_ABG_MOTORS.ipynb            # Jupyter Notebook with full workflow
+│── IN_Data.xlsx                          # Raw Indian dataset
+│── JPN_Data.xlsx                         # Raw Japanese dataset
+│── cleaned_indian_with_predictions.xlsx  # Indian dataset annotated with predictions (Excel)
+│── server.py                             # Flask backend server for the Web App
+│── generate_powerbi_data.py              # Script to generate predictions output for Power BI
+│── powerbi_powerquery_script.py          # Python code for Power BI Power Query transform
+│── powerbi_guide.md                      # DAX measures and visualization layout guide
+│── /templates/
+│   └── index.html                        # Dashboard HTML visual interface
+│── /static/
+│   ├── style.css                         # Dark-mode glassmorphism visual design styling
+│   └── app.js                            # UI state logic and Chart.js graphics setup
+│── README.md                             # Project documentation
 </pre>
 
 <hr>
 
 <h2>🛠️ Tools & Technologies</h2>
 <ul>
-    <li><b>Programming & Libraries:</b> Python, Pandas, NumPy, Scikit-learn, Seaborn, Matplotlib</li>
-    <li><b>Data Visualization:</b> Tableau</li>
-    <li><b>Environment:</b> Google Colab, Jupyter Notebook</li>
+    <li><b>Machine Learning:</b> Python, Pandas, NumPy, Scikit-learn (Logistic Regression, Decision Trees, Random Forests)</li>
+    <li><b>Web Application & API Backend:</b> Flask, Python, Uvicorn, REST APIs</li>
+    <li><b>Dashboard Frontend:</b> Vanilla HTML5, CSS3 (Glassmorphism Dark Mode), JavaScript (ES6+), Chart.js</li>
+    <li><b>Business Intelligence:</b> Power BI (DAX, Power Query ETL integration) and Tableau</li>
     <li><b>Version Control:</b> Git & GitHub</li>
 </ul>
 
@@ -134,8 +143,8 @@ ABG Motors is exploring expansion opportunities in India, assuming customer beha
 
 <!-- Image Preview -->
 <p align="center">
-    <a href="YOUR_TABLEAU_PUBLIC_LINK" target="_blank">
-        <img src="https://github.com/sujalsahu5082/Market-Entry-Analysis-for-ABG-Motors-in-India---CAPSTONE-PROJECT-/blob/main/Dashboard-Photo.png" alt="Tableau Dashboard Preview" width="800">
+    <a href="https://github.com/sujalsahu5082/Market-Entry-Analysis-for-ABG-Motors" target="_blank">
+        <img src="https://github.com/sujalsahu5082/Market-Entry-Analysis-for-ABG-Motors/raw/main/Dashboard-Photo.png" alt="Web Dashboard Preview" width="800">
     </a>
 </p>
 
