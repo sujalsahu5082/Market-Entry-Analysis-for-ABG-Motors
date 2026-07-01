@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABG Motors - Market Entry Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-car-side logo-icon"></i>
+                <div class="brand-text">
+                    <h1>ABG MOTORS</h1>
+                    <span>Market Entry Analytics</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <i class="fa-solid fa-chart-line"></i> Overview
+                </button>
+                <button class="nav-item" data-tab="eda">
+                    <i class="fa-solid fa-chart-pie"></i> Customer Demographics (EDA)
+                </button>
+                <button class="nav-item" data-tab="models">
+                    <i class="fa-solid fa-microchip"></i> Model Performance
+                </button>
+                <button class="nav-item" data-tab="predictor">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Interactive Predictor
+                </button>
+                <button class="nav-item" data-tab="recommendations">
+                    <i class="fa-solid fa-briefcase"></i> Business Verdict
+                </button>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="author-info">
+                    <p>Capstone Project by</p>
+                    <strong>Sujal Sahu</strong>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard View -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="view-title">Dashboard Overview</h2>
+                    <p id="view-subtitle">Strategic analysis for entering the Indian automobile market</p>
+                </div>
+                <div class="market-badge badge-yes">
+                    <i class="fa-solid fa-circle-check"></i> Entry Status: RECOMMENDED
+                </div>
+            </header>
+
+            <!-- Tab: Overview -->
+            <section id="overview" class="tab-content active">
+                <!-- KPI Stats Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Predicted Indian Buyers</span>
+                            <i class="fa-solid fa-users icon-users"></i>
+                        </div>
+                        <div class="metric-value" id="buyer-metric">13,285</div>
+                        <div class="metric-subtext">Estimated annual customer base</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Sales Benchmark</span>
+                            <i class="fa-solid fa-bullseye icon-target"></i>
+                        </div>
+                        <div class="metric-value">12,000</div>
+                        <div class="metric-subtext">Break-even target (cars/year)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Target Margin</span>
+                            <i class="fa-solid fa-arrow-trend-up icon-margin"></i>
+                        </div>
+                        <div class="metric-value text-green" id="margin-metric">+10.7%</div>
+                        <div class="metric-subtext">Exceeding benchmark threshold</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span>Primary Predictor</span>
+                            <i class="fa-solid fa-wallet icon-wallet"></i>
+                        </div>
+                        <div class="metric-value text-purple">Income</div>
+                        <div class="metric-subtext">Most influential buying factor</div>
+                    </div>
+                </div>
+
+                <!-- Main Analysis Row -->
+                <div class="dashboard-row">
+                    <!-- High-level Verdict Card -->
+                    <div class="glass-card verdict-summary">
+                        <h3><i class="fa-solid fa-circle-info text-blue"></i> Market Entry Feasibility</h3>
+                        <p class="verdict-text">
+                            Based on machine learning models trained on customer purchasing patterns, ABG Motors is projected to attract approximately <strong class="text-blue" id="verdict-buyers">13,285</strong> buyers annually in India. This exceeds the break-even volume of <strong>12,000</strong> cars by <strong>1,285 units (10.7%)</strong>.
+                        </p>
+                        <div class="verdict-box yes">
+                            <div class="verdict-box-icon">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div class="verdict-box-content">
+                                <h4>✅ VERDICT: PROCEED WITH ENTRY</h4>
+                                <p>The quantitative predictive models support a market entry into India. Purchasing behavior in Japan correlates well with demographic cohorts in India, indicating a strong product-market fit.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Chart Card -->
+                    <div class="glass-card chart-container">
+                        <h3><i class="fa-solid fa-chart-column text-purple"></i> Sales Volume vs. Target</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="overviewChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: EDA -->
+            <section id="eda" class="tab-content">
+                <div class="dashboard-row">
+                    <div class="glass-card chart-container flex-1">
+                        <h3><i class="fa-solid fa-chart-bar text-blue"></i> Purchase Rate by Age Group (Japan)</h3>
+                        <p class="chart-desc">Shows which age demographics are most likely to buy ABG vehicles.</p>
+                        <div class="chart-wrapper">
+                            <canvas id="agePurchaseChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card chart-container flex-1">
+                        <h3><i class="fa-solid fa-chart-line text-green"></i> Purchase Rate by Income Percentile (Japan)</h3>
+                        <p class="chart-desc">Demonstrates the strong correlation between income and buying intent.</p>
+                        <div class="chart-wrapper">
+                            <canvas id="incomePurchaseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row">
+                    <div class="glass-card chart-container flex-1">
+                        <h3><i class="fa-solid fa-users-rectangle text-purple"></i> Age Distribution: Japan vs. India</h3>
+                        <p class="chart-desc">Comparison of population ages between the training and target markets.</p>
+                        <div class="chart-wrapper">
+                            <canvas id="ageDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card text-card flex-1">
+                        <h3><i class="fa-solid fa-magnifying-glass-chart text-orange"></i> Demographic Analysis Insights</h3>
+                        <ul class="insights-list">
+                            <li>
+                                <div class="insights-icon"><i class="fa-solid fa-user-plus text-blue"></i></div>
+                                <div class="insights-content">
+                                    <strong>Age Sweet Spot:</strong> Customers in the <strong>30–50 age range</strong> represent the highest buying conversion rates.
+                                </div>
+                            </li>
+                            <li>
+                                <div class="insights-icon"><i class="fa-solid fa-sack-dollar text-green"></i></div>
+                                <div class="insights-content">
+                                    <strong>Income Dominance:</strong> Annual income shows an exponential correlation with purchase likelihood, particularly above the middle-class threshold.
+                                </div>
+                            </li>
+                            <li>
+                                <div class="insights-icon"><i class="fa-solid fa-venus-mars text-purple"></i></div>
+                                <div class="insights-content">
+                                    <strong>Gender Neutrality:</strong> Purchase intent is fairly uniform between genders, with a negligible skew towards male buyers.
+                                </div>
+                            </li>
+                            <li>
+                                <div class="insights-icon"><i class="fa-solid fa-globe text-orange"></i></div>
+                                <div class="insights-content">
+                                    <strong>Market Youth Skew:</strong> The Indian demographic profile exhibits a significantly younger median age than the Japanese demographic.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Models -->
+            <section id="models" class="tab-content">
+                <!-- Model Selector Tabs -->
+                <div class="sub-tabs">
+                    <button class="sub-tab active" data-model-tab="logistic">Logistic Regression</button>
+                    <button class="sub-tab" data-model-tab="dt">Decision Tree</button>
+                    <button class="sub-tab" data-model-tab="rf">Random Forest</button>
+                </div>
+
+                <div class="dashboard-row">
+                    <!-- Model Performance Metrics -->
+                    <div class="glass-card model-metrics-card flex-1">
+                        <h3><i class="fa-solid fa-gauge-high text-blue"></i> Classifier Metrics</h3>
+                        <div class="gauge-grid">
+                            <div class="gauge-box">
+                                <div class="gauge-title">Accuracy</div>
+                                <div class="gauge-val" id="model-accuracy">0.00%</div>
+                            </div>
+                            <div class="gauge-box">
+                                <div class="gauge-title">Precision</div>
+                                <div class="gauge-val text-green" id="model-precision">0.00%</div>
+                            </div>
+                            <div class="gauge-box">
+                                <div class="gauge-title">Recall</div>
+                                <div class="gauge-val text-purple" id="model-recall">0.00%</div>
+                            </div>
+                            <div class="gauge-box">
+                                <div class="gauge-title">F1-Score</div>
+                                <div class="gauge-val text-orange" id="model-f1">0.00%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="confusion-matrix-container">
+                            <h4>Confusion Matrix</h4>
+                            <div class="matrix">
+                                <div class="matrix-cell label"></div>
+                                <div class="matrix-cell label-top">Predicted: No</div>
+                                <div class="matrix-cell label-top">Predicted: Yes</div>
+                                <div class="matrix-cell label-left">Actual: No</div>
+                                <div class="matrix-cell cell-val" id="cm-tn">0</div>
+                                <div class="matrix-cell cell-val" id="cm-fp">0</div>
+                                <div class="matrix-cell label-left">Actual: Yes</div>
+                                <div class="matrix-cell cell-val" id="cm-fn">0</div>
+                                <div class="matrix-cell cell-val" id="cm-tp">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Importance / Coefficients -->
+                    <div class="glass-card chart-container flex-1">
+                        <h3><i class="fa-solid fa-list-check text-purple"></i> Feature Importance</h3>
+                        <p class="chart-desc">Shows relative influence of factors on purchasing decisions.</p>
+                        <div class="chart-wrapper">
+                            <canvas id="featureImportanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row">
+                    <!-- ROC Curve Card -->
+                    <div class="glass-card chart-container flex-1">
+                        <h3><i class="fa-solid fa-bezier-curve text-green"></i> ROC - AUC Comparison</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="rocChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- Model Summary Text -->
+                    <div class="glass-card text-card flex-1">
+                        <h3><i class="fa-solid fa-file-invoice text-orange"></i> Model Evaluation Notes</h3>
+                        <p class="model-notes-text" id="model-notes">
+                            Logistic Regression serves as our baseline model. It achieves an accuracy of ~68.5% with high recall, which minimizes the false-negative risk of missing potential buyers. Feature coefficients reveal that income dominates, while car age plays a strong role in depreciation and rebuy signals.
+                        </p>
+                        <div class="tuning-badge">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Hyperparameter Tuning: GridSearchCV Verified
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Predictor -->
+            <section id="predictor" class="tab-content">
+                <div class="dashboard-row">
+                    <!-- Input Form Panel -->
+                    <div class="glass-card predictor-form-card flex-1">
+                        <h3><i class="fa-solid fa-sliders text-blue"></i> Customer Profile</h3>
+                        <form id="prediction-form" class="predictor-form">
+                            <div class="form-group">
+                                <label for="age-input">Current Age (Years): <strong id="age-val-display">35</strong></label>
+                                <input type="range" id="age-input" min="18" max="80" value="35" class="slider">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gender:</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="0" checked>
+                                        <span>Male</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="1">
+                                        <span>Female</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="income-input">Annual Income: <strong id="income-val-display">₹ 8,00,000</strong></label>
+                                <input type="range" id="income-input" min="50000" max="2500000" step="25000" value="800000" class="slider">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-car-age" checked>
+                                    <span>Include Age of Current Car (4-Feature Model)</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group" id="car-age-group">
+                                <label for="car-age-input">Age of Current Car (Months): <strong id="car-age-val-display">36</strong></label>
+                                <input type="range" id="car-age-input" min="0" max="720" value="36" class="slider">
+                                <span class="help-text">Represents how long the customer has owned their current vehicle.</span>
+                            </div>
+
+                            <button type="submit" class="btn-predict">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Purchase Likelihood
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Results Panel -->
+                    <div class="glass-card predictor-results-card flex-1">
+                        <h3><i class="fa-solid fa-gauge text-purple"></i> Prediction Verdict</h3>
+                        
+                        <div class="predictions-list">
+                            <div class="pred-result-row">
+                                <div class="model-name">Logistic Regression</div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill progress-blue" id="prob-lr-bar" style="width: 0%"></div>
+                                </div>
+                                <div class="prob-percentage" id="prob-lr">0%</div>
+                            </div>
+
+                            <div class="pred-result-row">
+                                <div class="model-name">Decision Tree</div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill progress-green" id="prob-dt-bar" style="width: 0%"></div>
+                                </div>
+                                <div class="prob-percentage" id="prob-dt">0%</div>
+                            </div>
+
+                            <div class="pred-result-row">
+                                <div class="model-name">Random Forest</div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill progress-purple" id="prob-rf-bar" style="width: 0%"></div>
+                                </div>
+                                <div class="prob-percentage" id="prob-rf">0%</div>
+                            </div>
+                        </div>
+
+                        <!-- Verdict Card -->
+                        <div class="overall-verdict-box" id="prediction-verdict-box">
+                            <div class="verdict-icon"><i class="fa-solid fa-circle-question"></i></div>
+                            <div class="verdict-text">
+                                <h4 id="predictor-verdict-title">Awaiting Profile Input</h4>
+                                <p id="predictor-verdict-desc">Configure the customer profile sliders on the left and click predict to calculate the buying likelihood.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Recommendations -->
+            <section id="recommendations" class="tab-content">
+                <div class="glass-card recommendations-full">
+                    <h3><i class="fa-solid fa-circle-check text-green"></i> Final Strategic Market Entry Recommendations</h3>
+                    
+                    <div class="rec-sections">
+                        <div class="rec-item">
+                            <div class="rec-num">1</div>
+                            <div class="rec-content">
+                                <h4>Proceed with India Market Entry</h4>
+                                <p>Both Logistic Regression and Random Forest confirm that sales volume is highly likely to exceed the <strong>12,000 cars/year</strong> profitability threshold. Our baseline prediction shows <strong>13,285 potential buyers</strong> annually in our sample projection pool, providing a comfortable 10.7% margin buffer.</p>
+                            </div>
+                        </div>
+
+                        <div class="rec-item">
+                            <div class="rec-num">2</div>
+                            <div class="rec-content">
+                                <h4>Target High-Income & Middle-Age Groups</h4>
+                                <p>Income is the strongest predictor across all models. We should target marketing efforts in metro cities (tier 1 and tier 2) and structure customer segments around age ranges between <strong>30 and 50 years</strong>, where buying propensity peaks.</p>
+                            </div>
+                        </div>
+
+                        <div class="rec-item">
+                            <div class="rec-num">3</div>
+                            <div class="rec-content">
+                                <h4>Leverage Vehicle Replacement Cycles</h4>
+                                <p>The 4-feature models reveal that car owners with vehicles older than <strong>36–48 months (3–4 years)</strong> have a significantly higher likelihood of replacement. Marketing campaigns targeting trade-ins and upgrade incentives will yield high conversion rates.</p>
+                            </div>
+                        </div>
+
+                        <div class="rec-item">
+                            <div class="rec-num">4</div>
+                            <div class="rec-content">
+                                <h4>Establish Competitive Local Financing</h4>
+                                <p>Since income correlates exponentially with buying conversions, offering flexible EMI financing options will lower the barrier to entry for the younger (20-30 years) aspirational segment in India, which shows a rising income path.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Custom JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
